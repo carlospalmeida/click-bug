@@ -61,14 +61,38 @@ const clickBug = (el) => {
     //posiciona o splash no mesmo lugar
     splash.style.left = left
     splash.style.top = top
+
     //recarrega o GIF animado
     splash.src = `${splash.src}?v${Math.random()}`
-    
+
     let ponto = 10
+
     // se a velocidade for maior que 20
-    // ponto vale 100 e mostra a imagem "+100"
-    if(el.getAttribute('velocidade') > 20){
+    // ponto vale 100 e mostra a imagem "+100" (somente invasores)
+    if (el.getAttribute('velocidade') > 20 && el.classList.contains('invasor')) {
+
         ponto = 100
+
+        //Exibi a imagem +100 na posição do inseto
+        let img100 = document.getElementById('pts100')
+
+        let left = el.style.left
+        let top = el.style.top
+
+        img100.style.left = left
+        img100.style.top = top
+
+        //apos 1/2s muda o LEFT de img100 para '-5000px'
+        setTimeout(() => {
+            img100.style.left = '-5000px'
+        }, 400)
+    }
+
+    //se elemento for "bonzinho"
+    //Pontuação vale -50
+    if (el.classList.contains('bonzinho')) {
+        ponto = -50
+
     }
 
     //soma na pontuaçâo geral e remove da tela
@@ -112,7 +136,7 @@ for (const inv of invasores) {
     let incInicio = Math.floor(Math.random() * 10 + 5)
     posicElemento(inv)
     moveElemento(inv, velocInicio, incInicio)
-    inv.addEventListener('click', () => { clickBug(inv) })
+    inv.addEventListener('mousedown', () => { clickBug(inv) })
 }
 
 
@@ -122,6 +146,31 @@ for (const bom of bonzinhos) {
     let incInicio = Math.floor(Math.random() * 10 + 5)
     posicElemento(bom)
     moveElemento(bom, velocInicio, incInicio)
-    bom.addEventListener('click', () => { clickBug(bom) })
+    bom.addEventListener('mousedown', () => { clickBug(bom) })
 }
+
+
+//executa a cada segundo até atingir o valor
+//da variavel tempoRestante SetInterval
+
+
+//mostrar tempo antes 
+document.getElementById('infoTR').innerText = tempoRestante
+document.getElementById('temporest').innerText = --tempoRestante
+
+let tempo = tempoRestante
+
+const tempoGame = setInterval(() => {
+
+    //mostra o tempo no spans infoTR e temporest
+    document.getElementById('infoTR').innerText = tempoRestante
+    document.getElementById('temporest').innerText = --tempo
+
+    //se tempo for = 0 fim de jogo e recarrega a pagina
+    if(tempo == -1){
+        alert('GAME-OVER')
+        //recarrega a pagina(f5)
+        location.reload(true)
+    }
+}, 1000)
 

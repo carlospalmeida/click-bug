@@ -30,6 +30,20 @@
             background-color: rgba(220, 20, 143, 0.425);
         }
 
+        .aviso{
+            user-select: none;
+            font-weight: bold;
+            font-family: monospace;
+            color: red;
+        }
+
+        .developed{
+            user-select: none;
+            font-weight: bold;
+            font-family: monospace;
+            
+        }
+
         #pts100 {
             display: block;
             width: 50px;
@@ -44,6 +58,7 @@
             top: 0;
             /* desabilita ao clique */
             pointer-events: none;
+            user-select: none;
         }
 
         #quadro {
@@ -97,6 +112,14 @@
             <img src="imagens/splash.gif" id="splash">
 
             <img src="imagens/pontos100.png" id="pts100">
+
+            <div class="aviso text-center position-absolute bottom-0 w-100 pb-4">
+                Se acertar um inseto Bonzinho perde 50pts <br>
+            </div>
+
+            <div class="developed text-center position-absolute bottom-0 w-100 ">
+               <strong>Developed by Atdr.Carlos Eduardo</strong> 
+            </div>
         </div>
     </div>
 

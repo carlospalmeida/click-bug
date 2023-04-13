@@ -1,5 +1,5 @@
 # click-bug
- Um jogo feito para aprender melhor JavaScript
+ Um jogo feito para aprender melhor ```JavaScript```
 
 ### Linguagens utilizadas:
 
@@ -11,13 +11,13 @@
 
 <br>
 
-### Etapas do desenvolvimento:
+### Etapas do ```desenvolvimento```:
 
 <br>
 
-#### Estrutura css
+#### Estrutura ``css``
 
-````css
+~~~css
 
     html,
     body {
@@ -65,13 +65,13 @@
         top: 300px;
     }
 
-````
+~~~
 
 <br>
 
-#### Estrutura HTML
+#### Estrutura ``HTML``
 
-````html
+~~~html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -120,7 +120,67 @@
 
 
 
-````
+~~~
 <br>
+
+estrutura ``js``
+~~~js
+/*
+-------------------------------------------------
+ Funçôes
+-------------------------------------------------
+*/
+
+/*Função para posicionar o elemento na tela,
+Recebe o parametro el que informa qual elemento,
+qual o elemento se desloca*/
+const posicElemento = (el) => {
+    //sorteia um numero p/ os posicionamentos
+    let posX = Math.floor(Math.random() * 960 + 40)
+    let posY = Math.floor(Math.random() * alturaQuadro / 2 + 40)
+
+    //Posiciona o elemento na tela
+    el.style.position = 'absolute'
+    el.style.left = -posX + 'px'
+    el.style.top = posY + 'px'
+}
+
+/*Funçâo para deslocar os elementos na tela
+Paramentros de elemento, velocidade e incremendo */
+const moveElemento = (el, veloc, inc) => {
+    //setInterval - repete funçâo constantemente
+    const anima = setInterval(() => {
+        veloc = veloc + inc
+        el.style.left = veloc + 'px'
+
+        //verfica se sai da tela e faz o retorno
+        //Tbm verifica se possui a classe "morto" e ent executa o comando acima ^
+        if (veloc > larguraQuadro || el.classList.contains("morto")) {
+            //Redefine a velocidade e incremento
+            veloc = -Math.random() * 400 + 80
+            inc = Math.random() * 20 + 5
+            posicElemento(el)
+            //remove a classe "morto" do elemento
+            el.classList.remove('morto')
+        }
+        //Adiciona atributo "velocidade"
+        //aos elementos com o valor de incremento
+        el.setAttribute('velocidade', inc)
+
+    }, 40)
+
+    //parar interval
+    //clearInterval(anima)
+
+}
+
+~~~
+
+<br>
+
+<h3> Feito apenas para <strong>aprender</strong> js </h3>
+
+
+
 
 
